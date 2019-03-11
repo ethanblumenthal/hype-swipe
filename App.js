@@ -19,11 +19,11 @@ const MainNavigator = createBottomTabNavigator({
   //   navigationOptions: { tabBarVisible: false },
   //   lazy: true
   // },
-  auth: {
-    screen: AuthScreen,
-    navigationOptions: { tabBarVisible: false },
-    lazy: true
-  },
+  // auth: {
+  //   screen: AuthScreen,
+  //   navigationOptions: { tabBarVisible: false },
+  //   lazy: true
+  // },
   main: {
     navigationOptions: { tabBarVisible: false },
     screen: createBottomTabNavigator({
