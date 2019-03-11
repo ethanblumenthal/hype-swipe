@@ -25,12 +25,7 @@ const MainNavigator = createBottomTabNavigator({
     screen: createBottomTabNavigator({
       map: MapScreen,
       swipe: SwipeScreen,
-      review: {
-        screen: createStackNavigator({
-          likes: LikesScreen,
-          settings: SettingsScreen
-        })
-      }
+      likes: LikesScreen
     })
   }
 }, {

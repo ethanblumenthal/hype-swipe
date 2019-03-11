@@ -5,7 +5,7 @@ import _ from 'lodash'
 import Slides from '../components/Slides'
 
 const SLIDE_DATA = [
-  { text: 'Welcome to Hype Swipe!', color: '#3498db' },
+  { text: 'Welcome to HypeSwipe!', color: '#3498db' },
   { text: 'Find sweet things to do!', color: '#2ecc71' },
   { text: 'Set your location, then swipe away!', color: '#3498db' }
 ]
@@ -25,7 +25,7 @@ class WelcomeScreen extends Component {
   }
 
   onComplete = () => {
-    this.props.navigation.navigate('auth')
+    this.props.navigation.navigate('map')
   }
 
   render() {
