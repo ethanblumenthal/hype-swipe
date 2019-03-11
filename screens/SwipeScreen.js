@@ -63,7 +63,7 @@ class SwipeScreen extends Component {
           data={this.props.venues}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight={venue => this.props.likeVenue(venue)}
+          onSwipeRight={item => this.props.likeVenue(item.venue)}
           keyProp='id'
         />
       </View>

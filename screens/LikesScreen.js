@@ -8,22 +8,22 @@ class LikesScreen extends Component {
   static navigationOptions = {
     title: 'Likes',
     tabBarIcon: ({ tintColor }) => {
-      // return <Icon name='favorite' size={30} color={tintColor} />
+      return <Icon name='favorite' size={30} color={tintColor} />
     }
   }
 
   renderLikedVenues() {
-    return this.props.likes.map(venue => {
-      const { name, date, url, longitude, latitude, title, id } = venue
+    return this.props.likes.map(like => {
+      const { id, name, location } = like
       const initialRegion = {
-        longitude,
-        latitude,
+        longitude: location.lng,
+        latitude: location.lat,
         longitudeDelta: 0.02,
         latitudeDelta: 0.045
       }
       
       return (
-        <Card title={title} key={id}>
+        <Card title={name} key={id}>
           <View style={{ height: 200 }}>
             <MapView
               scrollEnabled={false}
@@ -32,13 +32,13 @@ class LikesScreen extends Component {
               initialRegion={initialRegion}
             ></MapView>
             <View style={styles.detailWrapper}>
-              <Text style={styles.italics}>{name}</Text>
-              <Text style={styles.italics}>{date}</Text>
+              <Text style={styles.italics}>{location.address}</Text>
+              <Text style={styles.italics}>{`${location.city}, ${location.state}`}</Text>
             </View>
             <Button
-              title='Apply Now!'
+              title='Check It Out!'
               backgroundColor='#03A9FA'
-              onPress={() => Linking.openURL(url)}
+              // onPress={() => Linking.openURL(url)}
             />
           </View>
         </Card>
@@ -49,7 +49,7 @@ class LikesScreen extends Component {
   render() {
     return (
       <ScrollView>
-        {/* {this.renderLikedVenues()} */}
+        {this.renderLikedVenues()}
       </ScrollView>
     )
   }
@@ -67,8 +67,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = state => ({
-  likes: state.likes
+const mapStateToProps = ({ likes }) => ({
+  likes
 })
 
 export default connect(mapStateToProps)(LikesScreen)
