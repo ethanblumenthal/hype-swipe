@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { PERSIST_REHYDRATE } from 'redux-persist/lib/constants'
-import { FETCH_VENUES, LIKE_VENUE, CLEAR_VENUES } from '../actions/venue_actions'
+import { FETCH_VENUES, LIKE_VENUE, CLEAR_VENUES } from '../actions'
 
 const INITIAL_STATE = {
   items: []

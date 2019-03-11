@@ -14,16 +14,16 @@ class SwipeScreen extends Component {
     }
   }
 
-  renderCard(venue) {
+  renderCard(item) {
     const initialRegion = {
-      latitude: venue.latitude,
-      longitude: venue.longitude,
+      latitude: item.venue.location.lat,
+      longitude: item.venue.location.lng,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421
     }
 
     return (
-      <Card title={venue.name}>
+      <Card title={item.venue.name}>
         <View style={{ height: 300 }}>
           <MapView
             scrollEnabled={false}
@@ -34,8 +34,8 @@ class SwipeScreen extends Component {
           </MapView>
         </View>
         <View style={styles.detailWrapper}>
-          <Text>{venue.location.address}</Text>
-          {/* <Text>{venue.formattedRelativeTime}</Text> */}
+          <Text>{item.venue.location.address}</Text>
+          <Text>{`${item.venue.location.city}, ${item.venue.location.state}`}</Text>
         </View>
         {/* <Text>{venue.snippet.replace(/<b>/g, '').replace(/<\/b>/g, '')}</Text> */}
       </Card>
@@ -57,7 +57,6 @@ class SwipeScreen extends Component {
   }
 
   render() {
-    console.log(venues)
     return (
       <View style={{ marginTop: 20 }}>
         <Swipe
@@ -80,8 +79,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ venues }) => {
-  return {venues: venues.items}
-}
+const mapStateToProps = ({ venue }) => ({
+  venues: venue
+})
 
 export default connect(mapStateToProps, { likeVenue })(SwipeScreen)
