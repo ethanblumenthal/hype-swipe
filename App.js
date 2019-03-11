@@ -1,13 +1,17 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { PersistGate } from 'redux-persist/es/integration/react'
+import { Provider } from 'react-redux'
 
 import WelcomeScreen from './screens/WelcomeScreen'
 import AuthScreen from './screens/AuthScreen'
 import MapScreen from './screens/MapScreen'
 import SwipeScreen from './screens/SwipeScreen'
 import LikesScreen from './screens/LikesScreen'
-import SettingsScreen from './screens/SettingsScreen'
+import configureStore from './store'
+
+const { persistor, store } = configureStore()
 
 const MainNavigator = createBottomTabNavigator({
   welcome: {
@@ -38,9 +42,13 @@ const AppContainer = createAppContainer(MainNavigator)
 class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <AppContainer />
-      </View>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <View style={styles.container}>
+            <AppContainer />
+          </View>
+        </PersistGate>
+      </Provider>
     )
   }
 }
