@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, ActivityIndicator } from 'react-native'
 import { MapView, Permissions, Location } from 'expo'
 import { Button, Icon } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { fetchVenues } from '../actions/venue_actions'
 
 class MapScreen extends Component {
   static navigationOptions = {
@@ -22,13 +24,12 @@ class MapScreen extends Component {
   }
 
   async componentDidMount() {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    let { status } = await Permissions.askAsync(Permissions.LOCATION)
     if (status === 'granted') {
       let { coords: { longitude, latitude }} = await Location.getCurrentPositionAsync({})
       this.setState({ region: { longitude, latitude, longitudeDelta: 0.0421, latitudeDelta: 0.0922 } })
     }
     this.setState({ mapLoaded: true })
-    console.log(this.state)
   }
 
   onRegionChangeComplete = region => {
@@ -36,9 +37,9 @@ class MapScreen extends Component {
   }
 
   onButtonPress = () => {
-    // this.props.fetchJobs(this.state.region, () => {
-    //   this.props.navigation.navigate('swipe')
-    // })
+    this.props.fetchVenues(this.state.region, () => {
+      this.props.navigation.navigate('swipe')
+    })
   }
 
   render() {
@@ -80,4 +81,4 @@ const styles = {
   }
 }
 
-export default MapScreen
+export default connect(null, fetchVenues)(MapScreen)
