@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { MapView } from 'expo'
-import { Card, Button, Icon, Image } from 'react-native-elements'
+import { Card, Button, Icon, Linking } from 'react-native-elements'
 import Swipe from '../components/Swipe'
 import { likeVenue } from '../actions'
 
@@ -19,10 +19,9 @@ class SwipeScreen extends Component {
     const initialRegion = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005
     }
-
     return (
       <Card title={name}>
         <View style={{ height: 300 }}>
@@ -31,15 +30,20 @@ class SwipeScreen extends Component {
             style={{ flex: 1 }}
             cacheEnabled={Platform.OS === 'android'}
             initialRegion={initialRegion}
-          ></MapView>
+          >
+          <MapView.Marker
+            coordinate={coordinates}
+          />
+          </MapView>
         </View>
         <View style={styles.detailWrapper}>
           <Text style={styles.italics}>{categories[0].title}</Text>
-          <Text style={styles.italics}>{rating}</Text>
+          <Text style={styles.italics}>{rating} stars</Text>
         </View>
         <Button
+          raised
           title='Check It Out!'
-          backgroundColor='#2ecc71'
+          buttonStyle={{ backgroundColor: '#2ecc71' }}
           onPress={() => Linking.openURL(url)}
         />
       </Card>
@@ -50,8 +54,8 @@ class SwipeScreen extends Component {
     return (
       <Card title='No More Venues'>
         <Button
+          raised
           title='Back To Map'
-          large
           icon={{ name: 'my-location', color: 'white' }}
           buttonStyle={{ backgroundColor: '#2ecc71' }}
           onPress={() => this.props.navigation.navigate('map')}

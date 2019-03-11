@@ -7,7 +7,7 @@ export default function(state = [], action) {
     case PERSIST_REHYDRATE:
       return action.likes || []
     case LIKE_VENUE: 
-      return _.uniqBy([action.venue, ...state], 'venue.id')
+      return _.uniqBy([action.venue, ...state], 'id')
     case CLEAR_VENUES:
       return []
     default:

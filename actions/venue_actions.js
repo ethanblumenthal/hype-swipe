@@ -4,7 +4,7 @@ import qs from 'qs'
 const YELP_API = 'https://api.yelp.com/v3/businesses/search?'
 const QUERY_PARAMS = {
   limit: '10',
-  radius: '1000'
+  radius: '500'
 }
 
 const buildApiUrl = (latitude, longitude) => {

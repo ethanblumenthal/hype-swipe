@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, Platform, ScrollView, Linking, Icon } from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import { View, Text, Platform, ScrollView, Linking } from 'react-native'
+import { Card, Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { MapView } from 'expo'
 
 class LikesScreen extends Component {
   static navigationOptions = {
-    title: 'Likes',
+    title: 'Favorites',
     tabBarIcon: ({ tintColor }) => {
-      // return <Icon name='favorite' size={30} color={tintColor} />
+      return <Icon name='favorite' size={30} color={tintColor} />
     }
   }
 
@@ -30,14 +30,19 @@ class LikesScreen extends Component {
               style={{ flex: 1 }}
               cacheEnabled={Platform.OS === 'android'}
               initialRegion={initialRegion}
-            ></MapView>
+            >
+            <MapView.Marker
+              coordinate={coordinates}
+            />
+            </MapView>
             <View style={styles.detailWrapper}>
               <Text style={styles.italics}>{categories[0].title}</Text>
-              <Text style={styles.italics}>{rating}</Text>
+              <Text style={styles.italics}>{rating} stars</Text>
             </View>
             <Button
+              raised
               title='Check It Out!'
-              backgroundColor='#2ecc71'
+              buttonStyle={{ backgroundColor: '#2ecc71' }}
               onPress={() => Linking.openURL(url)}
             />
           </View>
@@ -48,7 +53,7 @@ class LikesScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{marginTop: 20}}>
         {this.renderLikedVenues()}
       </ScrollView>
     )
