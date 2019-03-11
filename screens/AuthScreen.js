@@ -18,8 +18,9 @@ class Auth extends Component {
     }
     firebase.initializeApp(config)
 
+    // let token = await AsyncStorage.clear()
+
     let token = await AsyncStorage.getItem('token')
-    
     if (token) {
       this.props.navigation.navigate('map')
       this.setState({ token })
@@ -32,8 +33,9 @@ class Auth extends Component {
     this.setState({ signup: true })
   }
 
-  onSignIn = (token) => {
+  onSignIn = async (token) => {
     this.setState({ token })
+    await AsyncStorage.setItem('token', this.state.token)
     this.props.navigation.navigate('map')
   }
 
