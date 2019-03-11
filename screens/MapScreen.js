@@ -3,7 +3,7 @@ import { View, ActivityIndicator } from 'react-native'
 import { MapView, Permissions, Location } from 'expo'
 import { Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { fetchVenues } from '../actions/venue_actions'
+import { fetchVenues } from '../actions'
 
 class MapScreen extends Component {
   static navigationOptions = {
@@ -81,4 +81,4 @@ const styles = {
   }
 }
 
-export default connect(null, fetchVenues)(MapScreen)
+export default connect(null, {fetchVenues})(MapScreen)

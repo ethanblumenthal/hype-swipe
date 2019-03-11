@@ -9,22 +9,22 @@ const QUERY_PARAMS = {
   v: '20190310'
 }
 
-const buildJobsUrl = zip => {
+const buildJobsUrl = ll => {
   const query = qs.stringify({ ...QUERY_PARAMS, ll })
   return `${SQUARESPACE_API}${query}`
 }
 
-const FETCH_VENUES = 'FETCH_VENUES'
-const LIKE_VENUES = 'LIKED_VENUES'
-const CLEAR_VENUES = 'CLEAR_VENUES'
+export const FETCH_VENUES = 'FETCH_VENUES'
+export const LIKE_VENUE = 'LIKE_VENUE'
+export const CLEAR_VENUES = 'CLEAR_VENUES'
 
 export const fetchVenues = ({longitude, latitude}, callback) => async dispatch => {
   try {
-    const ll = `${longitude},${latitude}`
+    const ll = `${latitude},${longitude}`
     const url = buildJobsUrl(ll)
     console.log(url)
-    let { data } = await axios.get(url)
-    console.log(data)
+    // let { data } = await axios.get(url)
+    // console.log(data)
     // dispatch({ type: FETCH_VENUES, venues: data })
     callback()
   } catch (err) {
@@ -33,7 +33,7 @@ export const fetchVenues = ({longitude, latitude}, callback) => async dispatch =
 }
 
 export const likeVenue = venue => ({
-  type: LIKE_VENUES,
+  type: LIKE_VENUE,
   venue
 })
 
