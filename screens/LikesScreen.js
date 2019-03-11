@@ -37,7 +37,7 @@ class LikesScreen extends Component {
             </View>
             <Button
               title='Check It Out!'
-              backgroundColor='#03A9FA'
+              backgroundColor='#2ecc71'
               onPress={() => Linking.openURL(url)}
             />
           </View>

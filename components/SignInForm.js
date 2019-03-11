@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Input, Button } from 'react-native-elements'
+import { Input, Button, Text } from 'react-native-elements'
 import axios from 'axios'
 import firebase from 'firebase'
 
@@ -23,22 +23,31 @@ class SignInForm extends Component {
   render() {
     return (
       <View>
+        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>HypeSwipe</Text>
         <View style={{ marginBottom: 10 }}>
           <Input
-            label='Enter Phone Number'
+            placeholder=' Phone Number'
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
+            leftIcon={{name: 'phone', color: 'white'}}
           />
         </View>
 
         <View style={{ marginBottom: 10 }}>
           <Input
-            label='Enter Code'
+            placeholder=' Code'
             value={this.state.code}
             onChangeText={code => this.setState({ code })}
+            leftIcon={{name: 'code', color: 'white'}}
           />
         </View>
-        <Button onPress={this.handleSubmit} title='Submit' />
+        <Button
+          raised
+          title='Submit'
+          buttonStyle={{ backgroundColor: '#2ecc71' }}
+          containerStyle={{ marginTop: 15 }}
+          onPress={this.handleSubmit}
+        />
       </View>
     )
   }

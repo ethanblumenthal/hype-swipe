@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Input, Button } from 'react-native-elements'
+import { Input, Button, Text, withTheme } from 'react-native-elements'
 import axios from 'axios'
 
 const ROOT_URL = 'https://us-central1-one-time-password-21595.cloudfunctions.net'
@@ -21,14 +21,22 @@ class SignUpForm extends Component {
   render() {
     return (
       <View>
+        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>HypeSwipe</Text>
         <View style={{ marginBottom: 10 }}>
           <Input
-            label='Enter Phone Number'
+            placeholder=' Phone Number'
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
+            leftIcon={{name: 'phone', color: 'white'}}
           />
         </View>
-        <Button onPress={this.handleSubmit} title='Submit' />
+        <Button
+          raised
+          title='Submit'
+          buttonStyle={{ backgroundColor: '#2ecc71' }}
+          containerStyle={{ marginTop: 15 }}
+          onPress={this.handleSubmit}
+        />
       </View>
     )
   }

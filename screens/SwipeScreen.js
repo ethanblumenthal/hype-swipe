@@ -15,15 +15,16 @@ class SwipeScreen extends Component {
   }
 
   renderCard(item) {
+    const { id, name, rating, categories, coordinates, url } = item
     const initialRegion = {
-      latitude: item.coordinates.latitude,
-      longitude: item.coordinates.longitude,
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421
     }
 
     return (
-      <Card title={item.name}>
+      <Card title={name}>
         <View style={{ height: 300 }}>
           <MapView
             scrollEnabled={false}
@@ -33,10 +34,14 @@ class SwipeScreen extends Component {
           ></MapView>
         </View>
         <View style={styles.detailWrapper}>
-          <Text style={styles.italics}>{item.categories[0].title}</Text>
-          <Text style={styles.italics}>{item.rating}</Text>
+          <Text style={styles.italics}>{categories[0].title}</Text>
+          <Text style={styles.italics}>{rating}</Text>
         </View>
-        <Text>{item.location.display_address}</Text>
+        <Button
+          title='Check It Out!'
+          backgroundColor='#2ecc71'
+          onPress={() => Linking.openURL(url)}
+        />
       </Card>
     )
   }
