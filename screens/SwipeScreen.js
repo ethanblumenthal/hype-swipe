@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { MapView } from 'expo'
-import { Card, Button, Icon } from 'react-native-elements'
+import { Card, Button, Icon, Image } from 'react-native-elements'
 import Swipe from '../components/Swipe'
 import { likeVenue } from '../actions'
 
@@ -16,28 +16,27 @@ class SwipeScreen extends Component {
 
   renderCard(item) {
     const initialRegion = {
-      latitude: item.venue.location.lat,
-      longitude: item.venue.location.lng,
+      latitude: item.coordinates.latitude,
+      longitude: item.coordinates.longitude,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421
     }
 
     return (
-      <Card title={item.venue.name}>
+      <Card title={item.name}>
         <View style={{ height: 300 }}>
           <MapView
             scrollEnabled={false}
             style={{ flex: 1 }}
             cacheEnabled={Platform.OS === 'android'}
             initialRegion={initialRegion}
-          >
-          </MapView>
+          ></MapView>
         </View>
         <View style={styles.detailWrapper}>
-          <Text>{item.venue.location.address}</Text>
-          <Text>{`${item.venue.location.city}, ${item.venue.location.state}`}</Text>
+          <Text style={styles.italics}>{item.categories[0].title}</Text>
+          <Text style={styles.italics}>{item.rating}</Text>
         </View>
-        {/* <Text>{venue.snippet.replace(/<b>/g, '').replace(/<\/b>/g, '')}</Text> */}
+        <Text>{item.location.display_address}</Text>
       </Card>
     )
   }
@@ -63,7 +62,7 @@ class SwipeScreen extends Component {
           data={this.props.venues}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight={item => this.props.likeVenue(item.venue)}
+          onSwipeRight={item => this.props.likeVenue(item)}
           keyProp='id'
         />
       </View>
@@ -76,6 +75,9 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10
+  },
+  italics: {
+    fontStyle: 'italic'
   }
 }
 

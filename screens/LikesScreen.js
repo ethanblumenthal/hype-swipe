@@ -8,18 +8,18 @@ class LikesScreen extends Component {
   static navigationOptions = {
     title: 'Likes',
     tabBarIcon: ({ tintColor }) => {
-      return <Icon name='favorite' size={30} color={tintColor} />
+      // return <Icon name='favorite' size={30} color={tintColor} />
     }
   }
 
   renderLikedVenues() {
     return this.props.likes.map(like => {
-      const { id, name, location } = like
+      const { id, name, rating, categories, coordinates, url } = like
       const initialRegion = {
-        longitude: location.lng,
-        latitude: location.lat,
-        longitudeDelta: 0.02,
-        latitudeDelta: 0.045
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
       }
       
       return (
@@ -32,13 +32,13 @@ class LikesScreen extends Component {
               initialRegion={initialRegion}
             ></MapView>
             <View style={styles.detailWrapper}>
-              <Text style={styles.italics}>{location.address}</Text>
-              <Text style={styles.italics}>{`${location.city}, ${location.state}`}</Text>
+              <Text style={styles.italics}>{categories[0].title}</Text>
+              <Text style={styles.italics}>{rating}</Text>
             </View>
             <Button
               title='Check It Out!'
               backgroundColor='#03A9FA'
-              // onPress={() => Linking.openURL(url)}
+              onPress={() => Linking.openURL(url)}
             />
           </View>
         </Card>

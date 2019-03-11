@@ -1,19 +1,15 @@
 import axios from 'axios'
 import qs from 'qs'
 
-const SQUARESPACE_API = 'https://api.foursquare.com/v2/venues/explore?'
+const YELP_API = 'https://api.yelp.com/v3/businesses/search?'
 const QUERY_PARAMS = {
-  ll: '',
-  client_id: '5IX4GSF1JNESHQJRKZ4BLMRHLNRJP4ZXRM0AR0QWKLTEWKWT',
-  client_secret: 'NRLX55HNUBO4IJ02AIDIEQQKSGJU0LFKYEZEZXBK5CAWMWI5',
-  v: '20190310',
   limit: '10',
-  radius: '250'
+  radius: '1000'
 }
 
-const buildApiUrl = ll => {
-  const query = qs.stringify({ ...QUERY_PARAMS, ll })
-  return `${SQUARESPACE_API}${query}`
+const buildApiUrl = (latitude, longitude) => {
+  const query = qs.stringify({ ...QUERY_PARAMS, latitude, longitude })
+  return `${YELP_API}${query}`
 }
 
 export const FETCH_VENUES = 'FETCH_VENUES'
@@ -22,10 +18,13 @@ export const CLEAR_VENUES = 'CLEAR_VENUES'
 
 export const fetchVenues = ({ latitude, longitude }, callback) => async dispatch => {
   try {
-    const ll = `${latitude},${longitude}`
-    const url = buildApiUrl(ll)
-    let { data } = await axios.get(url)
-    let venues = data.response.groups[0].items
+    const url = buildApiUrl(latitude, longitude)
+    let { data } = await axios.get(url, {
+      headers: {
+        Authorization: 'Bearer 8Tiu8d4bCF812LHaCR_dUJj2purryNjo8nVPVbbqH-Un_zC1rv-WODZBrbRHLfcNUNo8v9Om0ht8_Zzze0jjq_qIumARo1WJGAh7HVS91ELvs9cDruM9P3cD_5n8WnYx'
+      }
+    })
+    let venues = data.businesses
     dispatch({ type: FETCH_VENUES, venues })
     callback()
   } catch (err) {
