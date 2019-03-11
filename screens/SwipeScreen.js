@@ -57,7 +57,7 @@ class SwipeScreen extends Component {
   }
 
   render() {
-    console.log(this.props.venues)
+    console.log(venues)
     return (
       <View style={{ marginTop: 20 }}>
         <Swipe
@@ -80,8 +80,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ venues }) => ({
-  venues
-})
+const mapStateToProps = ({ venues }) => {
+  return {venues: venues.items}
+}
 
 export default connect(mapStateToProps, { likeVenue })(SwipeScreen)

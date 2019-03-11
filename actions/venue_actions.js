@@ -25,8 +25,7 @@ export const fetchVenues = ({ latitude, longitude }, callback) => async dispatch
     const ll = `${latitude},${longitude}`
     const url = buildApiUrl(ll)
     let { data } = await axios.get(url)
-    let venues = data.response.groups['items']
-    console.log(venues)
+    let venues = data.response.groups[0].items
     dispatch({ type: FETCH_VENUES, venues })
     callback()
   } catch (err) {

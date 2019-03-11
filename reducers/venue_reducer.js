@@ -2,7 +2,11 @@ import _ from 'lodash'
 import { PERSIST_REHYDRATE } from 'redux-persist/lib/constants'
 import { FETCH_VENUES, LIKE_VENUE, CLEAR_VENUES } from '../actions/venue_actions'
 
-export default (state = [], action) => {
+const INITIAL_STATE = {
+  items: []
+}
+
+export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case PERSIST_REHYDRATE:
       return action.likes || []
