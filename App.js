@@ -14,11 +14,11 @@ import configureStore from './store'
 const { persistor, store } = configureStore()
 
 const MainNavigator = createBottomTabNavigator({
-  welcome: {
-    screen: WelcomeScreen,
-    navigationOptions: { tabBarVisible: false },
-    lazy: true
-  },
+  // welcome: {
+  //   screen: WelcomeScreen,
+  //   navigationOptions: { tabBarVisible: false },
+  //   lazy: true
+  // },
   auth: {
     screen: AuthScreen,
     navigationOptions: { tabBarVisible: false },
