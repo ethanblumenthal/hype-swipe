@@ -18,7 +18,7 @@ class Auth extends Component {
     }
     firebase.initializeApp(config)
 
-    // let token = await AsyncStorage.clear()
+    // await AsyncStorage.clear()
 
     let token = await AsyncStorage.getItem('token')
     if (token) {

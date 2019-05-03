@@ -81,4 +81,4 @@ const styles = {
   }
 }
 
-export default connect(null, {fetchVenues})(MapScreen)
+export default connect(null, { fetchVenues })(MapScreen)

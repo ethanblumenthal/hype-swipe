@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { Provider } from 'react-redux'
 
@@ -8,22 +8,26 @@ import AuthScreen from './screens/AuthScreen'
 import MapScreen from './screens/MapScreen'
 import SwipeScreen from './screens/SwipeScreen'
 import LikesScreen from './screens/LikesScreen'
+import SettingsScreen from './screens/SettingsScreen'
 import configureStore from './store'
 
 const { persistor, store } = configureStore()
 
 const MainNavigator = createBottomTabNavigator({
-  auth: {
-    screen: AuthScreen,
-    navigationOptions: { tabBarVisible: false },
-    lazy: true
-  },
+  // auth: {
+  //   screen: AuthScreen,
+  //   navigationOptions: { tabBarVisible: false },
+  //   lazy: true
+  // },
   main: {
     navigationOptions: { tabBarVisible: false },
     screen: createBottomTabNavigator({
       map: MapScreen,
       swipe: SwipeScreen,
-      likes: LikesScreen
+      screen: createStackNavigator({
+        likes: LikesScreen,
+        settings: SettingsScreen
+      })
     })
   }
 }, {
