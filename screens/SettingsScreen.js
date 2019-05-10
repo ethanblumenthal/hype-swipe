@@ -5,6 +5,12 @@ import { connect } from 'react-redux'
 import { clearVenues } from '../actions'
 
 class SettingsScreen extends Component {
+  onButtonPress = () => {
+    this.props.clearVenues(() => {
+      this.props.navigation.navigate('favorites')
+    })
+  }
+
   render() {
     return (
       <View>
@@ -13,7 +19,7 @@ class SettingsScreen extends Component {
           large
           icon={{ name: 'delete-forever', color: 'white' }}
           buttonStyle={{ backgroundColor: '#F44336', marginTop: 10, marginHorizontal: 50 }}
-          onPress={this.props.clearVenues}
+          onPress={this.onButtonPress()}
         />
       </View>
     )

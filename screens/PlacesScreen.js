@@ -8,7 +8,6 @@ import { likeVenue } from '../actions'
 
 class SwipeScreen extends Component {
   static navigationOptions = {
-    title: 'Places',
     tabBarIcon: ({ tintColor }) => {
       return <Icon name='description' size={30} color={tintColor} />
     }

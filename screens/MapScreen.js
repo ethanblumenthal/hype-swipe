@@ -7,7 +7,6 @@ import { fetchVenues } from '../actions'
 
 class MapScreen extends Component {
   static navigationOptions = {
-    title: 'Map',
     tabBarIcon: ({ tintColor }) => {
       return <Icon name='my-location' size={30} color={tintColor} />
     }

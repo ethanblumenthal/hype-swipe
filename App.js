@@ -1,20 +1,42 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
+import { Button } from 'react-native-elements'
 import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { Provider } from 'react-redux'
 
 import WelcomeScreen from './screens/WelcomeScreen'
 import AuthScreen from './screens/AuthScreen'
-import MapScreen from './screens/MapScreen'
-import SwipeScreen from './screens/SwipeScreen'
-import LikesScreen from './screens/LikesScreen'
 import SettingsScreen from './screens/SettingsScreen'
+import MapScreen from './screens/MapScreen'
+import PlacesScreen from './screens/PlacesScreen'
+import FavoritesScreen from './screens/FavoritesScreen'
 import configureStore from './store'
 
 const { persistor, store } = configureStore()
 
-const MainNavigator = createBottomTabNavigator({
+const navOptions = {
+  initialRouteName: 'main',
+  defaultNavigationOptions: ({ navigation }) => ({
+    headerTitle: 'Hype Swipe',
+    headerRight: (
+      <Button
+        title='Settings'
+        onPress={() => navigation.navigate('settings')}
+        buttonStyle={{ backgroundColor: 'white', marginRight: 10 }}
+        titleStyle={{ color: '#0389F4' }}
+      />
+    ),
+    style: {
+      marginTop: Platform.OS === 'android' ? 24 : 0
+    },
+    tabBarPosition: 'bottom',
+    swipeEnabled: 'false',
+    tabBarOptions: { labelStyle: { fontSize: 12 } }
+  })
+}
+
+const MainNavigator = createStackNavigator({
   welcome: {
     screen: WelcomeScreen,
     navigationOptions: { tabBarVisible: false },
@@ -25,22 +47,20 @@ const MainNavigator = createBottomTabNavigator({
     navigationOptions: { tabBarVisible: false },
     lazy: true
   },
+  settings: {
+    screen: SettingsScreen,
+    navigationOptions: { tabBarVisible: false },
+    lazy: true
+  },
   main: {
     navigationOptions: { tabBarVisible: false },
     screen: createBottomTabNavigator({
-      map: MapScreen,
-      swipe: SwipeScreen,
-      screen: createStackNavigator({
-        likes: LikesScreen,
-        settings: SettingsScreen
-      })
+      Map: MapScreen,
+      Places: PlacesScreen,
+      Favorites: FavoritesScreen
     })
   }
-}, {
-  tabBarPosition: 'bottom',
-  swipeEnabled: 'false',
-  tabBarOptions: { labelStyle: { fontSize: 12 } }
-})
+}, navOptions)
 const AppContainer = createAppContainer(MainNavigator)
 
 class App extends React.Component {

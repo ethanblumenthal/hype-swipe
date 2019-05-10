@@ -5,23 +5,11 @@ import { connect } from 'react-redux'
 import { MapView } from 'expo'
 
 class LikesScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Favorites',
+  static navigationOptions = {
     tabBarIcon: ({ tintColor }) => {
       return <Icon name='favorite' size={30} color={tintColor} />
-    },
-    headerRight: (
-      <Button
-        title='Settings'
-        onPress={() => navigation.navigate('settings')}
-        buttonStyle={{ backgroundColor: 'white', marginRight: 10 }}
-        titleStyle={{ color: '#0389F4' }}
-      />
-    ),
-    style: {
-      marginTop: Platform.OS === 'android' ? 24 : 0
     }
-  })
+  }
 
   renderLikedVenues() {
     return this.props.likes.map(like => {
