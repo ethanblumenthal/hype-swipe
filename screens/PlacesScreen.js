@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Linking, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { MapView } from 'expo'
-import { Card, Button, Icon, Linking } from 'react-native-elements'
+import { Card, Image, Button, Icon, Rating } from 'react-native-elements'
 import Swipe from '../components/Swipe'
 import { createFavorite } from '../actions'
 
@@ -14,30 +13,29 @@ class PlacesScreen extends Component {
   }
 
   renderCard(item) {
-    const { id, name, rating, categories, coordinates, url } = item
-    const initialRegion = {
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
-      latitudeDelta: 0.005,
-      longitudeDelta: 0.005
-    }
+    let { name, categories, rating, price, url, image_url } = item
+    categories = categories.map(category => category.title).join(', ')
+
+    if (!image_url) image_url = '??'
+    if (!price) price = '??'
+
     return (
       <Card title={name}>
-        <View style={{ height: 300 }}>
-          <MapView
-            scrollEnabled={false}
-            style={{ flex: 1 }}
-            cacheEnabled={Platform.OS === 'android'}
-            initialRegion={initialRegion}
-          >
-          <MapView.Marker
-            coordinate={coordinates}
+        <Text style={styles.categories}>{categories}</Text>
+        <View style={{ alignContent: 'center' }}>
+          <Image
+            style={{ width: 350, height: 300 }}
+            source={{ uri: image_url }}
+            PlaceholderContent={<ActivityIndicator />}
           />
-          </MapView>
         </View>
         <View style={styles.detailWrapper}>
-          <Text style={styles.italics}>{categories[0].title}</Text>
-          <Text style={styles.italics}>{rating} stars</Text>
+          <Rating
+            imageSize={25}
+            readonly
+            startingValue={rating}
+          />
+          <Text style={styles.price}>{price}</Text>
         </View>
         <Button
           raised
@@ -82,10 +80,18 @@ const styles = {
   detailWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10
+    alignItems: 'center',
   },
-  italics: {
-    fontStyle: 'italic'
+  price: {
+    fontSize: 25,
+    marginTop: 5,
+    marginBottom: 5
+  },
+  categories: {
+    textAlign: 'center',
+    fontStyle: 'italic',
+    fontSize: 10,
+    marginBottom: 5
   }
 }
 
