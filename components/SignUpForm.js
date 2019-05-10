@@ -21,10 +21,10 @@ class SignUpForm extends Component {
   render() {
     return (
       <View>
-        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>HypeSwipe</Text>
+        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>Sign Up!</Text>
         <View style={{ marginBottom: 10 }}>
           <Input
-            placeholder=' Phone Number'
+            placeholder=' Phone #'
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
             leftIcon={{name: 'phone', color: 'white'}}

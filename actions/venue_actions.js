@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import keys from '../config/keys'
 
 const YELP_API = 'https://api.yelp.com/v3/businesses/search?'
 const QUERY_PARAMS = {
@@ -21,7 +22,7 @@ export const fetchVenues = ({ latitude, longitude }, callback) => async dispatch
     const url = buildApiUrl(latitude, longitude)
     let { data } = await axios.get(url, {
       headers: {
-        Authorization: 'Bearer 8Tiu8d4bCF812LHaCR_dUJj2purryNjo8nVPVbbqH-Un_zC1rv-WODZBrbRHLfcNUNo8v9Om0ht8_Zzze0jjq_qIumARo1WJGAh7HVS91ELvs9cDruM9P3cD_5n8WnYx'
+        Authorization: `Bearer ${keys.yelpApiKey}`
       }
     })
     let venues = data.businesses

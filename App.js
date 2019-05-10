@@ -4,6 +4,7 @@ import { createBottomTabNavigator, createStackNavigator, createAppContainer } fr
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { Provider } from 'react-redux'
 
+import WelcomeScreen from './screens/WelcomeScreen'
 import AuthScreen from './screens/AuthScreen'
 import MapScreen from './screens/MapScreen'
 import SwipeScreen from './screens/SwipeScreen'
@@ -14,11 +15,16 @@ import configureStore from './store'
 const { persistor, store } = configureStore()
 
 const MainNavigator = createBottomTabNavigator({
-  // auth: {
-  //   screen: AuthScreen,
-  //   navigationOptions: { tabBarVisible: false },
-  //   lazy: true
-  // },
+  welcome: {
+    screen: WelcomeScreen,
+    navigationOptions: { tabBarVisible: false },
+    lazy: true
+  },
+  auth: {
+    screen: AuthScreen,
+    navigationOptions: { tabBarVisible: false },
+    lazy: true
+  },
   main: {
     navigationOptions: { tabBarVisible: false },
     screen: createBottomTabNavigator({

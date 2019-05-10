@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, AsyncStorage } from 'react-native'
 import firebase from 'firebase'
+import keys from '../config/keys'
 import SignUpForm from '../components/SignUpForm'
 import SignInForm from '../components/SignInForm'
 
 class Auth extends Component {
   state = { token: null, signup: false }
 
-  async componentDidMount() {
+  componentDidMount() {
     const config = {
-      apiKey: "AIzaSyBOBWi1mo2H13HhWTMRgVpfclAMrLSxkMQ",
+      apiKey: keys.firebaseApiKey,
       authDomain: "one-time-password-21595.firebaseapp.com",
       databaseURL: "https://one-time-password-21595.firebaseio.com",
       projectId: "one-time-password-21595",
@@ -17,16 +18,6 @@ class Auth extends Component {
       messagingSenderId: "914742074935"
     }
     firebase.initializeApp(config)
-
-    // await AsyncStorage.clear()
-
-    let token = await AsyncStorage.getItem('token')
-    if (token) {
-      this.props.navigation.navigate('map')
-      this.setState({ token })
-    } else {
-      this.setState({ token: false })
-    }
   }
 
   onSignUp = () => {
