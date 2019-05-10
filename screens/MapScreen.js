@@ -3,7 +3,7 @@ import { View, ActivityIndicator } from 'react-native'
 import { MapView, Permissions, Location } from 'expo'
 import { Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { fetchVenues } from '../actions'
+import { fetchPlaces } from '../actions'
 
 class MapScreen extends Component {
   static navigationOptions = {
@@ -36,8 +36,8 @@ class MapScreen extends Component {
   }
 
   onButtonPress = () => {
-    this.props.fetchVenues(this.state.region, () => {
-      this.props.navigation.navigate('swipe')
+    this.props.fetchPlaces(this.state.region, () => {
+      this.props.navigation.navigate('Places')
     })
   }
 
@@ -80,4 +80,4 @@ const styles = {
   }
 }
 
-export default connect(null, { fetchVenues })(MapScreen)
+export default connect(null, { fetchPlaces })(MapScreen)

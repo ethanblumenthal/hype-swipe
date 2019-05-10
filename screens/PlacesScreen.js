@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { MapView } from 'expo'
 import { Card, Button, Icon, Linking } from 'react-native-elements'
 import Swipe from '../components/Swipe'
-import { likeVenue } from '../actions'
+import { createFavorite } from '../actions'
 
-class SwipeScreen extends Component {
+class PlacesScreen extends Component {
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => {
       return <Icon name='description' size={30} color={tintColor} />
@@ -51,13 +51,13 @@ class SwipeScreen extends Component {
 
   renderNoMoreCards = () => {
     return (
-      <Card title='No More Venues'>
+      <Card title='No More Places'>
         <Button
           raised
           title='Back To Map'
           icon={{ name: 'my-location', color: 'white' }}
           buttonStyle={{ backgroundColor: '#2ecc71' }}
-          onPress={() => this.props.navigation.navigate('map')}
+          onPress={() => this.props.navigation.navigate('Map')}
         />
       </Card>
     )
@@ -67,10 +67,10 @@ class SwipeScreen extends Component {
     return (
       <View style={{ marginTop: 20 }}>
         <Swipe
-          data={this.props.venues}
+          data={this.props.places}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight={item => this.props.likeVenue(item)}
+          onSwipeRight={item => this.props.createFavorite(item)}
           keyProp='id'
         />
       </View>
@@ -89,8 +89,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ venue }) => ({
-  venues: venue
+const mapStateToProps = ({ places }) => ({
+  places
 })
 
-export default connect(mapStateToProps, { likeVenue })(SwipeScreen)
+export default connect(mapStateToProps, { createFavorite })(PlacesScreen)

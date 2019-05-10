@@ -13,11 +13,9 @@ const buildApiUrl = (latitude, longitude) => {
   return `${YELP_API}${query}`
 }
 
-export const FETCH_VENUES = 'FETCH_VENUES'
-export const LIKE_VENUE = 'LIKE_VENUE'
-export const CLEAR_VENUES = 'CLEAR_VENUES'
+export const FETCH_PLACES = 'FETCH_PLACES'
 
-export const fetchVenues = ({ latitude, longitude }, callback) => async dispatch => {
+export const fetchPlaces = ({ latitude, longitude }, callback) => async dispatch => {
   try {
     const url = buildApiUrl(latitude, longitude)
     let { data } = await axios.get(url, {
@@ -25,19 +23,10 @@ export const fetchVenues = ({ latitude, longitude }, callback) => async dispatch
         Authorization: `Bearer ${keys.yelpApiKey}`
       }
     })
-    let venues = data.businesses
-    dispatch({ type: FETCH_VENUES, venues })
+    let places = data.businesses
+    dispatch({ type: FETCH_PLACES, places })
     callback()
   } catch (err) {
     console.error(err)
   }
 }
-
-export const likeVenue = venue => ({
-  type: LIKE_VENUE,
-  venue
-})
-
-export const clearVenues = () => ({
-  type: CLEAR_VENUES
-})

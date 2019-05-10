@@ -4,16 +4,16 @@ import { Card, Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { MapView } from 'expo'
 
-class LikesScreen extends Component {
+class FavoriteScreen extends Component {
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => {
       return <Icon name='favorite' size={30} color={tintColor} />
     }
   }
 
-  renderLikedVenues() {
-    return this.props.likes.map(like => {
-      const { id, name, rating, categories, coordinates, url } = like
+  renderFavorites() {
+    return this.props.favorites.map(favorite => {
+      const { id, name, rating, categories, coordinates, url } = favorite
       const initialRegion = {
         latitude: coordinates.latitude,
         longitude: coordinates.longitude,
@@ -53,7 +53,7 @@ class LikesScreen extends Component {
   render() {
     return (
       <ScrollView style={{marginTop: 20}}>
-        {this.renderLikedVenues()}
+        {this.renderFavorites()}
       </ScrollView>
     )
   }
@@ -71,8 +71,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ likes }) => ({
-  likes
+const mapStateToProps = ({ favorites }) => ({
+  favorites
 })
 
-export default connect(mapStateToProps)(LikesScreen)
+export default connect(mapStateToProps)(FavoriteScreen)

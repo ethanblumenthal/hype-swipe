@@ -7,7 +7,7 @@ import reducers from '../reducers'
 const config = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['likes']
+  whitelist: ['favorites']
  }
 
 const reducer = persistCombineReducers(config, reducers)
