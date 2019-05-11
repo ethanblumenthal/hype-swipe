@@ -27,7 +27,7 @@ class Auth extends Component {
   onSignIn = async (token) => {
     this.setState({ token })
     await AsyncStorage.setItem('token', this.state.token)
-    this.props.navigation.navigate('map')
+    this.props.navigation.navigate('Map')
   }
 
   render() {

@@ -18,7 +18,7 @@ class WelcomeScreen extends Component {
 
     let token = await AsyncStorage.getItem('token')
     if (token) {
-      this.props.navigation.navigate('map')
+      this.props.navigation.navigate('Map')
       this.setState({ token })
     } else {
       this.setState({ token: false })
@@ -26,7 +26,7 @@ class WelcomeScreen extends Component {
   }
 
   onSlidesComplete = () => {
-    this.props.navigation.navigate('auth')
+    this.props.navigation.navigate('Auth')
   }
 
   render() {

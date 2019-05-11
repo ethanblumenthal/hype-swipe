@@ -1,5 +1,6 @@
 const admin = require('firebase-admin')
-const twilio = require('./twilio')
+const keys = require('../config/keys')
+const client = require('twilio')(keys.twilioSID, keys.twilioAuthToken)
 
 module.exports = (req, res) => {
   if (!req.body.phone) {
@@ -12,7 +13,7 @@ module.exports = (req, res) => {
     .then(userRecord => {
       const code = Math.floor(Math.random() * 8999 + 1000)
 
-      twilio.messages.create({
+      client.messages.create({
         body: `Your code is ${code}`,
         to: phone,
         from: '+18726669650'

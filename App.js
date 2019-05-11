@@ -16,13 +16,13 @@ import configureStore from './store'
 const { persistor, store } = configureStore()
 
 const navOptions = {
-  initialRouteName: 'main',
+  initialRouteName: 'Welcome',
   defaultNavigationOptions: ({ navigation }) => ({
-    headerTitle: 'Hype Swipe',
+    headerTitle: 'HypeSwipe',
     headerRight: (
       <Button
         title='Settings'
-        onPress={() => navigation.navigate('settings')}
+        onPress={() => navigation.navigate('Settings')}
         buttonStyle={{ backgroundColor: 'white', marginRight: 10 }}
         titleStyle={{ color: '#0389F4' }}
       />
@@ -32,27 +32,28 @@ const navOptions = {
     },
     tabBarPosition: 'bottom',
     swipeEnabled: 'false',
+    headerLeft: null,
     tabBarOptions: { labelStyle: { fontSize: 12 } }
   })
 }
 
 const MainNavigator = createStackNavigator({
-  welcome: {
+  Welcome: {
     screen: WelcomeScreen,
-    navigationOptions: { tabBarVisible: false },
+    navigationOptions: { header: null, tabBarVisible: false },
     lazy: true
   },
-  auth: {
+  Auth: {
     screen: AuthScreen,
-    navigationOptions: { tabBarVisible: false },
+    navigationOptions: { header: null, tabBarVisible: false },
     lazy: true
   },
-  settings: {
+  Settings: {
     screen: SettingsScreen,
     navigationOptions: { tabBarVisible: false },
     lazy: true
   },
-  main: {
+  Main: {
     navigationOptions: { tabBarVisible: false },
     screen: createBottomTabNavigator({
       Map: MapScreen,

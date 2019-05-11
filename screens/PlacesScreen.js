@@ -90,7 +90,7 @@ const styles = {
   categories: {
     textAlign: 'center',
     fontStyle: 'italic',
-    fontSize: 10,
+    fontSize: 12,
     marginBottom: 5
   }
 }

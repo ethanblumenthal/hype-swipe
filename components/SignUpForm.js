@@ -11,7 +11,7 @@ class SignUpForm extends Component {
   handleSubmit = async () => {
     try {
       await axios.post(`${ROOT_URL}/createUser`, { phone: this.state.phone })
-      await axios.post(`${ROOT_URL}/requestOneTimePassword`, { phone: this.state.phone })
+      await axios.post(`${ROOT_URL}/requestPassword`, { phone: this.state.phone })
       this.props.onSignUp()
     } catch (err) {
       console.log(err)
