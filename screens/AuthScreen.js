@@ -6,7 +6,7 @@ import SignUpForm from '../components/SignUpForm'
 import SignInForm from '../components/SignInForm'
 
 class Auth extends Component {
-  state = { token: null, signup: false }
+  state = { token: null, signup: false, phone: '' }
 
   componentDidMount() {
     const config = {
@@ -20,8 +20,8 @@ class Auth extends Component {
     firebase.initializeApp(config)
   }
 
-  onSignUp = () => {
-    this.setState({ signup: true })
+  onSignUp = phone => {
+    this.setState({ signup: true, phone })
   }
 
   onSignIn = async (token) => {
@@ -40,7 +40,7 @@ class Auth extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <SignInForm onSignIn={this.onSignIn} />
+          <SignInForm onSignIn={this.onSignIn} phone={this.state.phone} />
         </View>
       )
     }

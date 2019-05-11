@@ -14,6 +14,7 @@ class WelcomeScreen extends Component {
   state = { token: null }
 
   async componentWillMount() {
+    // UNCOMMENT TO CLEAR AUTH TOKEN
     // await AsyncStorage.clear()
 
     let token = await AsyncStorage.getItem('token')

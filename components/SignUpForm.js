@@ -12,7 +12,7 @@ class SignUpForm extends Component {
     try {
       await axios.post(`${ROOT_URL}/createUser`, { phone: this.state.phone })
       await axios.post(`${ROOT_URL}/requestPassword`, { phone: this.state.phone })
-      this.props.onSignUp()
+      this.props.onSignUp(this.state.phone)
     } catch (err) {
       console.log(err)
     }
@@ -21,13 +21,16 @@ class SignUpForm extends Component {
   render() {
     return (
       <View>
-        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>Sign Up!</Text>
+        <Text h1={true} h1Style={{ color: 'white', marginBottom: 30 }}>Sign Up!</Text>
         <View style={{ marginBottom: 10 }}>
           <Input
-            placeholder=' Phone #'
+            placeholder='Phone Number'
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
-            leftIcon={{name: 'phone', color: 'white'}}
+            leftIcon={{ name: 'phone', color: 'white' }}
+            leftIconContainerStyle={{ marginRight: 5 }}
+            keyboardType="phone-pad"
+            inputStyle={{ color: 'white' }}
           />
         </View>
         <Button

@@ -9,6 +9,10 @@ const ROOT_URL = 'https://us-central1-one-time-password-21595.cloudfunctions.net
 class SignInForm extends Component {
   state = { phone: '', code: '' }
 
+  componentDidMount() {
+    this.setState({ phone: this.props.phone })
+  }
+
   handleSubmit = async () => {
     try {
       const { phone, code } = this.state
@@ -23,22 +27,16 @@ class SignInForm extends Component {
   render() {
     return (
       <View>
-        <Text h1={true} h1Style={{color: 'white', marginBottom: 30 }}>HypeSwipe</Text>
+        <Text h1={true} h1Style={{ color: 'white', marginBottom: 30 }}>Sign In!</Text>
         <View style={{ marginBottom: 10 }}>
           <Input
-            placeholder=' Phone Number'
-            value={this.state.phone}
-            onChangeText={phone => this.setState({ phone })}
-            leftIcon={{name: 'phone', color: 'white'}}
-          />
-        </View>
-
-        <View style={{ marginBottom: 10 }}>
-          <Input
-            placeholder=' Code'
+            placeholder='Secret Code'
             value={this.state.code}
             onChangeText={code => this.setState({ code })}
-            leftIcon={{name: 'code', color: 'white'}}
+            leftIcon={{ name: 'code', color: 'white' }}
+            leftIconContainerStyle={{ marginRight: 5 }}
+            keyboardType="phone-pad"
+            inputStyle={{ color: 'white' }}
           />
         </View>
         <Button
